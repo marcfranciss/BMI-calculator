@@ -1,0 +1,150 @@
+#root {
+  max-width: 1440px;
+  width: 100%;
+
+  --gunmetal: rgb(37, 51, 71);
+  --dark-blue-900: rgb(94, 110, 133);
+  --dark-blue-600: rgb(172, 193, 222);
+  --dark-blue-300: rgb(179, 211, 241);
+  --dark-blue-100: rgb(231, 245, 254);
+  --dark-orange: rgb(242, 78, 30);
+  --blue: rgb(52, 95, 246);
+  --pure-white: rgb(255, 255, 255);
+  --teal: rgb(34, 193, 193);
+  --pink: rgb(242, 30, 132);
+  --orange: rgb(246, 145, 52);
+  --purple: rgb(151, 71, 255);
+  --yellow: rgb(255, 199, 0);
+
+  --br-xs: 4px;
+  --br-s: 8px;
+  --br-m: 12px;
+  --br-l: 16px;
+  --br-xl: 28px;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url(./assets/fonts/Inter-VariableFont_slnt\wght.ttf) format(ttf);
+}
+
+*,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--pure-white);
+}
+.heading-xl {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 64px;
+  line-height: 110%;
+  letter-spacing: -5%;
+}
+.heading-l {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-style: 48px;
+  line-height: 110%;
+  letter-spacing: -5%;
+}
+.heading-m {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-style: 24px;
+  line-height: auto;
+  letter-spacing: -5%;
+}
+.heading-s {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-style: 20px;
+  line-height: auto;
+  letter-spacing: -5%;
+}
+
+.body-m {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-style: 16px;
+  line-height: 150%;
+}
+.body-m-b {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-style: 16px;
+  line-height: 150%;
+}
+.body-s {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-style: 14px;
+  line-height: 150%;
+}
+
+/* layout spacing */
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 72px;
+}
+@media (max-width: 60rem) {
+  header {
+    justify-content: center;
+    margin-top: 2rem;
+  }
+}
+section {
+  margin: 3rem auto;
+}
+
+.hero-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 2rem;
+
+  .left-wing,
+  .right-wing {
+    width: 50%;
+  }
+  .left-wing {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
+@media (max-width: 60rem) {
+  .hero-container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .left-wing,
+  .right-wing {
+    width: 100%;
+  }
+  .left-wing {
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+  }
+}
+
+h1 {
+  color: var(--gunmetal);
+}
+@media (max-width: 60rem) {
+  h1 {
+    text-align: center;
+  }
+}
