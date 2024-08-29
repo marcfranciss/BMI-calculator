@@ -1,0 +1,58 @@
+.metric {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 1.5rem;
+
+  .height,
+  .weight {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    label {
+      color: var(--dark-blue-900);
+      width: 100%;
+    }
+    .measurement-holder {
+      display: flex;
+      flex-direction: row;
+      padding: 20px 1.5rem;
+      justify-content: space-between;
+      border-radius: 12px;
+      border: 1px solid var(--dark-blue-900);
+      box-shadow: 0 0 1px 1px var(--dark-blue-900);
+      transition: 0.2s all linear;
+
+      &[aria-invalid="true"] {
+        border: 1px solid red;
+        box-shadow: 0 0 1px 1px red;
+
+        input {
+          color: red;
+        }
+      }
+    }
+    input[type="number"] {
+      border: none;
+      outline: none;
+      color: var(--gunmetal);
+      position: relative;
+      width: 80%;
+    }
+    span {
+      color: var(--blue);
+    }
+  }
+}
+@media (max-width: 30rem) {
+  .metric {
+    flex-direction: column;
+
+    .height,
+    .weight {
+      width: 100%;
+    }
+  }
+}
