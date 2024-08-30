@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./imperial.css";
 import InputComponent from "../../Utils/InputComponent/InputComponent";
 
@@ -15,28 +15,30 @@ const Imperial = ({ setHeight, setWeight }: forCalculation) => {
   const [stonesValue, setFStonesValue] = useState<string>("");
   const [poundsValue, setPoundsValue] = useState<string>("");
 
-  useEffect(() => {
-    // Converts stones(st) and pounds(lb) to kilogram
-    // and sends it to BmiForm to calculate
-    function convertToKg() {
+  // Converts stones(st) and pounds(lb) to kilogram
+  // and sends it to BmiForm to calculate
+  if (stonesValue != "" || poundsValue != "") {
+    const convertToKg = () => {
       const stones = Number(stonesValue) * 6.35029;
       const pounds = Number(poundsValue) * 0.453592;
       const kilogramVal = stones + pounds;
-      return String(kilogramVal);
-    }
-    setWeight(convertToKg());
+      setWeight(String(kilogramVal));
+    };
+    convertToKg();
+  }
 
-    // Converts ft & inches to
-    // and send it to BmiForm to calculate
-    function convertToCm() {
+  // Converts ft & inches to
+  // and send it to BmiForm to calculate
+  if (feetValue != "" || inchesValue != "") {
+    const convertToCm = () => {
       const feet = Number(feetValue) * 0.3048;
       const inches = Number(inchesValue) * 0.0254;
       const centimeterVal = (feet + inches) * 100;
 
-      return String(centimeterVal);
-    }
-    setHeight(convertToCm());
-  }, [feetValue, inchesValue, stonesValue, poundsValue]);
+      setHeight(String(centimeterVal));
+    };
+    convertToCm();
+  }
   return (
     <div className='imperial'>
       <div className='height'>

@@ -1,5 +1,6 @@
 .bmi-calculator {
   background-color: var(--pure-white);
+  box-shadow: 1rem 2rem 3.5rem 0 rgba(143, 174, 207, 25%);
   color: var(--gunmetal);
   padding: 2rem;
   width: 100%;
@@ -64,6 +65,7 @@
   border-radius: 1rem 95px 95px 1rem;
   gap: 1.5rem;
   background-color: var(--blue);
+  min-height: 170px;
 
   .bmi-welcome {
     width: 100%;

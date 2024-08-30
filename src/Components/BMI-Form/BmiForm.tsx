@@ -2,36 +2,65 @@ import { ChangeEvent, useEffect, useState } from "react";
 import "../bmiForm.css";
 import Metric from "./Metric/Metric";
 import Imperial from "./Imperial/Imperial";
+import { idealWeightChecker } from "../Utils/idealWeight";
 
 const BmiForm = () => {
-  const [selectedRadio, setSelectedRadio] = useState<string>("");
-  const [userHeight, setUserHeight] = useState("");
-  const [userWeight, setUserWeight] = useState("");
-  const [resultBMI, setResultBMI] = useState("");
+  const [selectedRadio, setSelectedRadio] = useState<string>("metric");
+  const [userHeight, setUserHeight] = useState<string>("");
+  const [userWeight, setUserWeight] = useState<string>("");
+  const [resultBMI, setResultBMI] = useState<string>("");
+  const [classification, setClassification] = useState<string>("");
+  const [idealWeight, setIdealWeight] = useState<string>("");
 
   useEffect(() => {
-    const calculateBMI = () => {
-      const calcHeight = Number(userHeight);
-      const calcWeight = Number(userWeight);
-
-      return (calcWeight / (calcHeight / 100) ** 2).toFixed(1);
+    const calculateBMI = (height: string, weight: string) => {
+      if (height != "" && weight != "") {
+        const calcHeight = Number(height);
+        const calcWeight = Number(weight);
+        const result = (calcWeight / (calcHeight / 100) ** 2).toFixed(1);
+        setResultBMI(result);
+      }
     };
-    setResultBMI(calculateBMI);
+    calculateBMI(userHeight, userWeight);
   }, [userHeight, userWeight]);
-  function handleRadio(e: ChangeEvent<HTMLInputElement>) {
+
+  useEffect(() => {
+    const checkClassification = (userBMI: string) => {
+      if (userBMI != "") {
+        const convertedBMI = Number(userBMI);
+        if (convertedBMI < 18.5) {
+          setClassification("underweight");
+        } else if (convertedBMI >= 18.5 && convertedBMI < 24.9) {
+          setClassification("healthy weight");
+        } else if (convertedBMI >= 25 && convertedBMI <= 29.9) {
+          setClassification("overweight");
+        } else {
+          setClassification("obese");
+        }
+      }
+    };
+    checkClassification(resultBMI);
+  }, [resultBMI]);
+
+  useEffect(() => {
+    const suggestedWeight = idealWeightChecker(Number(userHeight));
+    console.log(`Your ideal weight is ${suggestedWeight}`);
+    setIdealWeight(suggestedWeight);
+  }, [userHeight]);
+  const handleRadio = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
+    setSelectedRadio(value);
     setResultBMI("");
     setUserHeight("");
     setUserWeight("");
-    setSelectedRadio(value);
-  }
+  };
 
-  function handleHeightChange(value: string) {
+  const handleHeightChange = (value: string) => {
     setUserHeight(value);
-  }
-  function handleWeightChange(value: string) {
+  };
+  const handleWeightChange = (value: string) => {
     setUserWeight(value);
-  }
+  };
   return (
     <div className='bmi-calculator'>
       <h2 className='heading-m'>Enter your details below</h2>
@@ -84,8 +113,8 @@ const BmiForm = () => {
             </div>
             <div className='bmi-result_sugg'>
               <p className='body-s'>
-                Your BMI suggests you’re a healthy weight. Your ideal weight is
-                between <strong>9st 6lbs - 12st 10lbs</strong>.
+                Your BMI suggests you’re {classification}. Your ideal weight is
+                between <strong>{idealWeight}</strong>.
               </p>
             </div>
           </div>
