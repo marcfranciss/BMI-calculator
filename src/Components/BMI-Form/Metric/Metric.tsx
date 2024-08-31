@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./metric.css";
+import { unitLimits } from "../../Utils/data";
 import InputComponent from "../../Utils/InputComponent/InputComponent";
 
 interface forCalculation {
@@ -20,7 +21,7 @@ const Metric = ({ setHeight, setWeight }: forCalculation) => {
         <div className='measurement-holder' aria-invalid={warningHeight}>
           <InputComponent
             name='height'
-            maximum={280}
+            maximum={unitLimits.height.cm}
             setWarning={setWarningHeight}
             sendValue={setHeight}
           />
@@ -34,7 +35,7 @@ const Metric = ({ setHeight, setWeight }: forCalculation) => {
         <div className='measurement-holder' aria-invalid={warningWeight}>
           <InputComponent
             name='weight'
-            maximum={700}
+            maximum={unitLimits.weight.kg}
             setWarning={setWarningWeight}
             sendValue={setWeight}
           />

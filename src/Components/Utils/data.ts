@@ -45,4 +45,8 @@ export const limitsArr = [
     header: "Race",
     text: "Certain health concerns may affect individuals of some Black and Asian origins at lower BMIs than others. To learn more, it is advised to discuss this with your GP or practice nurse.",
   },
-]
+];
+export const unitLimits = {
+  height: { cm: 190, ft: 8, inch: 12 },
+  weight: { kg: 115, st: 18, lb: 14 },
+};

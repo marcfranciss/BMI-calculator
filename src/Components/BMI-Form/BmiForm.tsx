@@ -4,13 +4,17 @@ import Metric from "./Metric/Metric";
 import Imperial from "./Imperial/Imperial";
 import { idealWeightChecker } from "../Utils/idealWeight";
 
+interface idealW {
+  female: { min: string; max: string };
+  male: { min: string; max: string };
+}
 const BmiForm = () => {
   const [selectedRadio, setSelectedRadio] = useState<string>("metric");
   const [userHeight, setUserHeight] = useState<string>("");
   const [userWeight, setUserWeight] = useState<string>("");
   const [resultBMI, setResultBMI] = useState<string>("");
   const [classification, setClassification] = useState<string>("");
-  const [idealWeight, setIdealWeight] = useState<string>("");
+  const [idealWeight, setIdealWeight] = useState<idealW | undefined>(undefined);
 
   useEffect(() => {
     const calculateBMI = (height: string, weight: string) => {
@@ -34,8 +38,10 @@ const BmiForm = () => {
           setClassification("healthy weight");
         } else if (convertedBMI >= 25 && convertedBMI <= 29.9) {
           setClassification("overweight");
-        } else {
+        } else if (convertedBMI > 29.9) {
           setClassification("obese");
+        } else {
+          console.error("BMI is out of range.");
         }
       }
     };
@@ -112,10 +118,25 @@ const BmiForm = () => {
               <h4 className='heading-xl'>{resultBMI}</h4>
             </div>
             <div className='bmi-result_sugg'>
-              <p className='body-s'>
-                Your BMI suggests you’re {classification}. Your ideal weight is
-                between <strong>{idealWeight}</strong>.
-              </p>
+              {idealWeight ? (
+                <p className='body-s'>
+                  Your BMI suggests you’re {classification}. Your ideal weight
+                  is between
+                  <strong>
+                    {" "}
+                    {idealWeight.female.min} to {idealWeight.female.max} for
+                    female
+                  </strong>{" "}
+                  and{" "}
+                  <strong>
+                    {" "}
+                    {idealWeight.male.min} to {idealWeight.male.max} for male
+                  </strong>
+                  .
+                </p>
+              ) : (
+                "Your height or weight is not in the range for BMI calculations"
+              )}
             </div>
           </div>
         )}

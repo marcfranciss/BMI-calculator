@@ -181,10 +181,11 @@ export const idealWeightChecker = (userHeight: number) => {
     // Find in idealWeightTable the result in 'geHeightRange function'
     const result = idealWeightTable.find((item) => item.heightCm === getHeightRange(userHeight));
     console.log(result)
-    if (result) {        
-        return `${result.male.min} to ${result.male.max}`
+    if (result) {
+      const toObj = {female: {min: result.female.min, max: result.female.max}, male: {min: result.male.min, max: result.male.max}}
+      return toObj;
     } else {
-        return 'height not found'
+        console.log("Height not found")
     }
 
 }

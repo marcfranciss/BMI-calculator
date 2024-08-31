@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./imperial.css";
 import InputComponent from "../../Utils/InputComponent/InputComponent";
+import { unitLimits } from "../../Utils/data";
 
 interface forCalculation {
   setHeight: (value: string) => void;
@@ -49,7 +50,7 @@ const Imperial = ({ setHeight, setWeight }: forCalculation) => {
           <div className='measurement-holder' aria-invalid={warningHeight}>
             <InputComponent
               name='height'
-              maximum={280}
+              maximum={unitLimits.height.ft}
               setWarning={setWarningHeight}
               sendValue={setFeetValue}
             />
@@ -58,7 +59,7 @@ const Imperial = ({ setHeight, setWeight }: forCalculation) => {
           <div className='measurement-holder' aria-invalid={warningHeight}>
             <InputComponent
               name='height'
-              maximum={280}
+              maximum={unitLimits.height.inch}
               setWarning={setWarningHeight}
               sendValue={setInchValue}
             />
@@ -74,7 +75,7 @@ const Imperial = ({ setHeight, setWeight }: forCalculation) => {
           <div className='measurement-holder' aria-invalid={warningWeight}>
             <InputComponent
               name='weight'
-              maximum={700}
+              maximum={unitLimits.weight.st}
               setWarning={setWarningWeight}
               sendValue={setFStonesValue}
             />
@@ -83,7 +84,7 @@ const Imperial = ({ setHeight, setWeight }: forCalculation) => {
           <div className='measurement-holder' aria-invalid={warningWeight}>
             <InputComponent
               name='weight'
-              maximum={700}
+              maximum={unitLimits.weight.lb}
               setWarning={setWarningWeight}
               sendValue={setPoundsValue}
             />

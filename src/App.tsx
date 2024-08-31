@@ -37,6 +37,7 @@ function App() {
             src={resultImg}
             alt='A man holding chopsticks with sushi.'
             className='left-wing_img'
+            loading='lazy'
           />
         </div>
         <div className='right-wing'>
